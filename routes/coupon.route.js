@@ -9,3 +9,5 @@ Router.route('/:id')
   .get(couponController.getCoupon)
   .patch(couponController.updateCoupon)
   .delete(couponController.deleteCoupon);
+
+module.exports = Router;

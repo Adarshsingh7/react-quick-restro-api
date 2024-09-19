@@ -8,3 +8,5 @@ Router.route('/:id')
   .get(seatController.getSeat)
   .patch(seatController.updateSeat)
   .delete(seatController.deleteSeat);
+
+module.exports = Router;

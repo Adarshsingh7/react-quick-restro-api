@@ -8,3 +8,5 @@ Router.route('/:id')
   .get(transactionController.getTransaction)
   .patch(transactionController.updateTransaction)
   .delete(transactionController.deleteTransaction);
+
+module.exports = Router;

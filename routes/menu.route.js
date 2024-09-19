@@ -8,3 +8,5 @@ Router.route('/:id')
   .get(menuController.getMenu)
   .patch(menuController.updateMenu)
   .delete(menuController.deleteMenu);
+
+module.exports = Router;
