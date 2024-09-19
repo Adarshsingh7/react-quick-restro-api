@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./../models/user.model.js');
 const catchAsync = require('../utils/catchAsync.js');
 const AppError = require('../utils/appError.js');
-const sendEmail = require('../utils/email.js');
+const sendEmail = require('../controllers/email.controller.js');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.SECRET, {
@@ -66,7 +66,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password)))
     return next(new AppError('incorrect email or password', 403));
 
-  //   const token = createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, res);
   // res
   //   .status(200)
   //   .json({
@@ -167,14 +167,12 @@ exports.forgotPassword = async (req, res, next) => {
     'host',
   )}/api/v1/users/resetPassword/${resetToken}`;
 
-  const message = `FORGOT your password? submit your PATCH request with your new password and password confirm to ${resetURL}\n ignore this email if you did'nt forgot your password`;
-
   try {
-    await sendEmail({
-      email: freshUser.email,
-      subject: 'password reset token valid for 10 min',
-      message,
-    });
+    const mailResponse = await sendEmail(req.body.email, resetURL);
+    if (mailResponse.status !== 'success')
+      return next(
+        new AppError('failed to sent email do check your email', 400),
+      );
     res.status(200).json({
       status: 'success',
       message: 'message sent successfully',
@@ -190,6 +188,7 @@ exports.forgotPassword = async (req, res, next) => {
 };
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
+  console.log('resetting password');
   // 1) get user based on the token
   const hashed = crypto
     .createHash('sha256')
@@ -217,6 +216,13 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     status: 'success',
     message: 'password changed successfully',
     token,
+  });
+});
+
+exports.getMe = catchAsync(async (req, res) => {
+  return res.status(200).json({
+    status: 200,
+    user: req.user,
   });
 });
 

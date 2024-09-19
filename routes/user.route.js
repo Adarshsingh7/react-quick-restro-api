@@ -5,7 +5,14 @@ const authController = require('./../controllers/auth.controller');
 Router.post('/login', authController.login);
 Router.post('/signup', authController.signUp);
 Router.post('/forgetPassword', authController.forgotPassword);
-Router.patch('/resetPassword', authController.resetPassword);
+Router.patch('/resetPassword/:token', authController.resetPassword);
+
+Router.use(authController.protect);
+
+Router.use(authController.updatePassword);
+Router.get('/me', authController.getMe);
+
+Router.use(authController.restrictTo('admin'));
 
 Router.route('/')
   .get(userController.getAllUsers)
