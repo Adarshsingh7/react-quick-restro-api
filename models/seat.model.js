@@ -11,11 +11,6 @@ const seatSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    table: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Table',
-      required: true,
-    },
   },
   {
     timestamps: true,

@@ -108,13 +108,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('user does not exist log in again!', 401));
 
   // 4)check user changed password after jwt was issued
-  if (!freshUser.changedPasswordAfter())
+  if (freshUser.changedPasswordAfter(decoded.iat))
     return next(
       new AppError('the password has been changed please login again', 401),
     );
 
   req.user = freshUser;
-  // req.locals.user = freshUser;
   next();
 });
 

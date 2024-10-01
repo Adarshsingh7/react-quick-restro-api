@@ -87,7 +87,9 @@ userSchema.methods.correctPassword = async function (
   userPassword,
 ) {
   try {
-    return await bcrypt.compare(candidatePassword, userPassword);
+    const res = await bcrypt.compare(candidatePassword, userPassword);
+    console.log(candidatePassword, userPassword);
+    return res;
   } catch (err) {
     console.error('Error occurred: ', err);
   }
@@ -100,6 +102,8 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
       this.passwordChangedAt.getTime() / 1000,
       10,
     );
+    console.log(JWTTimestamp, changedTimestamp);
+    console.log(JWTTimestamp < changedTimestamp);
     return JWTTimestamp < changedTimestamp;
   }
   return false;

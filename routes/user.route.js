@@ -9,7 +9,7 @@ Router.patch('/resetPassword/:token', authController.resetPassword);
 
 Router.use(authController.protect);
 
-Router.use(authController.updatePassword);
+Router.use(authController.restrictTo('admin', 'user'));
 Router.get('/me', authController.getMe);
 
 Router.use(authController.restrictTo('admin'));
