@@ -31,6 +31,13 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/adarsh', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: 'this is adarsh route',
+  });
+});
+
 app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/menus', menuRouter);
 app.use('/api/v1/orders', orderRouter);

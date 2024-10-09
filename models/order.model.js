@@ -27,7 +27,6 @@ const orderSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User',
-    required: [true, 'An order must be associated with a user'],
   },
   items: [orderItemSchema],
   totalAmount: {
@@ -59,6 +58,23 @@ const orderSchema = new Schema({
       message: 'Payment method must be one of: cash, card, online',
     },
     default: 'cash',
+  },
+  recipientName: {
+    type: String,
+    trim: true,
+    maxlength: [50, 'recipient name must be less than 50 characters'],
+    required: [true, 'A recipient name must be specified'],
+  },
+  recipientEmail: {
+    type: String,
+    trim: true,
+    maxlength: [50, 'recipient email must be less than 50 characters'],
+    required: [true, 'A recipient email must be specified'],
+  },
+  recipientPhoneNumber: {
+    type: String,
+    trim: true,
+    required: [true, 'A recipient phone number must be specified'],
   },
   delivery: {
     type: String,

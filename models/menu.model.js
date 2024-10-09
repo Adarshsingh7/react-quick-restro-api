@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const menuSchema = new mongoose.Schema({
   name: {
@@ -7,7 +8,7 @@ const menuSchema = new mongoose.Schema({
     trim: true,
     maxlength: [
       100,
-      'Menu item name must have less     or equal than 100 characters',
+      'Menu item name must have less or equal than 100 characters',
     ],
     minlength: [3, 'Menu item name must have more or equal than 3 characters'],
   },
@@ -25,9 +26,16 @@ const menuSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A menu item must belong to a category'],
     enum: {
-      values: ['appetizer', 'main course', 'dessert', 'beverages', 'snacks'],
+      values: [
+        'appetizer',
+        'main course',
+        'dessert',
+        'beverages',
+        'snacks',
+        'vegetable',
+      ],
       message:
-        'Category must be either: appetizer, main course, dessert, beverages, or snacks',
+        'Category must be either: appetizer, main course, dessert, beverages, vegetable or snacks',
     },
   },
   availability: {
@@ -111,6 +119,8 @@ const menuSchema = new mongoose.Schema({
     default: true,
   },
 });
+
+menuSchema.plugin(AutoIncrement, { inc_field: 'itemId' });
 
 menuSchema.pre('save', function (next) {
   this.isAvailable = this.stock > 0;
