@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Menu = require('./menu.model');
 const { Schema } = mongoose;
 
 const orderItemSchema = new Schema({
@@ -103,6 +104,22 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+orderSchema.post('save', async function (doc, next) {
+  try {
+    doc.items.map(async (el) => {
+      const item = await Menu.findById(el.menuItem);
+      if (item) {
+        item.stock -= el.quantity;
+        await item.save();
+      }
+    });
+  } catch (err) {
+    next(err);
+  } finally {
+    next();
+  }
 });
 
 // Middleware to update `updatedAt` on save
