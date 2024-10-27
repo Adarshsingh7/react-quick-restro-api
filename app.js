@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.route');
 const reviewRouter = require('./routes/review.route');
 const seatRouter = require('./routes/seat.route');
 const transactionRouter = require('./routes/transaction.route');
+const imageUploader = require('./controllers/image.controller');
 
 app.use(express.json());
 app.use(cors());
@@ -37,6 +38,13 @@ app.get('/adarsh', (req, res) => {
     data: 'this is adarsh route',
   });
 });
+
+app.post(
+  '/upload',
+  imageUploader.createUpload,
+  imageUploader.cloudMid,
+  imageUploader.imageUploader,
+);
 
 app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/menus', menuRouter);

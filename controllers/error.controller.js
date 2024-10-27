@@ -1,5 +1,3 @@
-/** @format */
-
 const AppError = require('./../utils/appError');
 
 const handleCastErrorDB = (err) => {
@@ -63,7 +61,7 @@ module.exports = (err, req, res, next) => {
   let error = Object.assign({}, err); // This preserves the original error object, including nested properties like err.errors.
   error.message = err.message;
 
-  console.log('hello from global error handler👋', error);
+  console.log(err);
 
   if (err.name === 'CastError') error = handleCastErrorDB(err);
   if (err.code === 11000) error = handleDuplicateFieldsDB(err);

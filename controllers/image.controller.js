@@ -1,11 +1,16 @@
 /** @format */
 const fs = require('fs');
-const process = require('process');
 const multer = require('multer');
 const AppError = require('./../utils/appError');
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+console.log({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -67,7 +72,6 @@ exports.imageUploader = async (req, res, next) => {
     status: 'success',
     data: {
       res: res.locals,
-      message: 'image uploaded successfully',
     },
   });
 };
