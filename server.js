@@ -5,7 +5,7 @@ dotenv.config({ path: './config.env' });
 const app = require('./app.js');
 
 mongoose
-  .connect(process.env.DATABASE)
+  .connect(process.env.DATABASE_REMOTE)
   .then(() => {
     console.log('DB connection successful! 🎉');
   })
