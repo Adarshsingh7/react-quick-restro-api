@@ -14,6 +14,7 @@ const reviewRouter = require('./routes/review.route');
 const seatRouter = require('./routes/seat.route');
 const transactionRouter = require('./routes/transaction.route');
 const imageUploader = require('./controllers/image.controller');
+const pusherRouter = require('./routes/pusher.route');
 
 app.use(express.json());
 app.use(cors());
@@ -53,6 +54,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/seats', seatRouter);
 app.use('/api/v1/transactions', transactionRouter);
+app.use('/api/v1/notify', pusherRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
