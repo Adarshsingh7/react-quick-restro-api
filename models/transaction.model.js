@@ -9,6 +9,10 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   order: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order',

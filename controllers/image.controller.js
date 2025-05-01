@@ -50,6 +50,7 @@ exports.cloudMid = (req, res, next) => {
       res.locals.width = result.width;
       res.locals.type = result.resource_type;
       res.locals.size = result.bytes;
+      req.imageUrl = result.url;
       next();
     },
   );

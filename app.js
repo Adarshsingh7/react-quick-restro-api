@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
-const fileUpload = require('express-fileupload');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
 
@@ -19,12 +18,6 @@ const pusherRouter = require('./routes/pusher.route');
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/tmp/',
-  }),
-);
 
 app.get('/', (req, res) => {
   res.status(200).json({

@@ -9,8 +9,12 @@ const orderItemSchema = new Schema({
     required: [true, 'An order item must be associated with a menu item'],
   },
   variant: {
-    type: Schema.Types.Mixed, // For variant details, e.g., size or toppings
+    type: Schema.Types.Mixed,
     default: {},
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   quantity: {
     type: Number,

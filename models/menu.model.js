@@ -17,6 +17,10 @@ const menuSchema = new mongoose.Schema({
     trim: true,
     maxlength: [500, 'Description must have less or equal than 500 characters'],
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   price: {
     type: Number,
     required: [true, 'A menu item must have a price'],
