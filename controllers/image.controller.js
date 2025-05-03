@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
     cb(null, './public/user');
   },
   filename: function (req, file, cb) {
+    console.log('creating the storage');
     if (file.mimetype.startsWith('image/')) {
       cb(null, file.originalname);
     } else {
@@ -25,6 +26,7 @@ const storage = multer.diskStorage({
 
 exports.cloudMid = (req, res, next) => {
   if (!req.file) return next();
+  console.log(req.body);
   cloudinary.uploader.upload(
     req.file.path,
     {
@@ -51,6 +53,9 @@ exports.cloudMid = (req, res, next) => {
       res.locals.type = result.resource_type;
       res.locals.size = result.bytes;
       req.imageUrl = result.url;
+      if (req.body.fieldName) {
+        req.body[req.body.fieldName] = result.url;
+      }
       next();
     },
   );
