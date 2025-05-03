@@ -4,7 +4,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
-
 const couponRouter = require('./routes/coupon.route');
 const menuRouter = require('./routes/menu.route');
 const orderRouter = require('./routes/order.route');

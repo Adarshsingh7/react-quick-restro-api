@@ -6,7 +6,7 @@ Router.route('/')
 
 Router.route('/:id')
   .get(orderController.getOrder)
-  .patch(orderController.updateOrder)
+  .patch(orderController.sendMail, orderController.updateOrder)
   .delete(orderController.deleteOrder);
 
 module.exports = Router;
