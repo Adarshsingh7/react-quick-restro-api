@@ -16,6 +16,12 @@ const pusherRouter = require('./routes/pusher.route');
 
 app.use(express.json());
 app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  }),
+);
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
