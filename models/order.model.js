@@ -12,10 +12,6 @@ const orderItemSchema = new Schema({
     type: Schema.Types.Mixed,
     default: {},
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
   quantity: {
     type: Number,
     required: [true, 'An order item must have a quantity'],
@@ -47,6 +43,10 @@ const orderSchema = new Schema({
         'Order status must be one of: new, preparing, completed, cancelled',
     },
     default: 'new',
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   paymentStatus: {
     type: String,
