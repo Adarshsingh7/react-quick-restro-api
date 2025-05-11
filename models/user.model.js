@@ -35,8 +35,18 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    minlength: [8, 'Minimum 8 character password is required'],
+    minlength: [8, 'Passsword of minimum 8 character password is required'],
     select: false,
+  },
+  restroName: {
+    type: String,
+    required: [true, 'Restro Name is required'],
+    minlength: [3, 'Restro Name of minimum 3 character password is required'],
+  },
+  restroAddress: {
+    type: String,
+    required: [true, 'Restro Address is required'],
+    minlength: [3, 'Address of minimum 3 character password is required'],
   },
   passwordConfirm: {
     type: String,

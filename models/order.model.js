@@ -73,8 +73,8 @@ const orderSchema = new Schema({
   recipientEmail: {
     type: String,
     trim: true,
-    maxlength: [50, 'recipient email must be less than 50 characters'],
-    required: [true, 'A recipient email must be specified'],
+    // maxlength: [50, 'recipient email must be less than 50 characters'],
+    // required: [true, 'A recipient email must be specified'],
   },
   recipientPhoneNumber: {
     type: String,

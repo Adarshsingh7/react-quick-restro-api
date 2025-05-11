@@ -3,7 +3,8 @@ const handlerFactory = require('./handlerFactory');
 const sendEmail = require('../controllers/email.controller');
 
 exports.sendMail = async (req, res, next) => {
-  // console.log(req.body);
+  console.log('req.body.recipientEmail');
+  if (!req.body.recipientEmail) next();
   if (req.body.update) {
     sendEmail(req.body.recipientEmail, 'paymentConfirmation', {
       name: req.body.recipientName,
