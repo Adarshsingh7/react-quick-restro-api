@@ -64,6 +64,11 @@ const orderSchema = new Schema({
     },
     default: 'cash',
   },
+  razorpayOrderId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
   recipientName: {
     type: String,
     trim: true,
